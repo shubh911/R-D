@@ -1,0 +1,32 @@
+<html>
+	<head>
+		
+		<link href="css/default.css" rel="stylesheet" />
+		<link href="external/bootstrap-3.3.7/dist/css/bootstrap.css" rel="stylesheet" />
+		<link href = 'style.css' rel = 'stylesheet'>
+		<script src = 'external/angular-min.js'></script>
+		<script src="js/default.js"></script>
+		<link href="https://fonts.googleapis.com/css?family=Fredericka+the+Great" rel="stylesheet">
+	</head>
+	<body ng-app = 'myApp' ng-controller = 'gameController'>
+			<div class = 'container scoreBoard'>
+				<div class = 'row'>
+					<H2 class = 'col-md-3 col-md-offset-2'>{{chance}}'s turn</H2>
+					<H2 class = 'col-md-5'>X : {{score.x}} | O :{{score.y}}&nbsp &nbsp &nbsp <span class="glyphicon glyphicon-flag"></span>: {{gamePlayed}}</H2>
+					<button class = 'btn btn-danger col-md-1 col-md-offset-1 reset' ng-click = 'resetGame()'> RESET</button>
+				</div>
+			</div>
+			<div  class = 'container playBoard' ng-repeat = 'x in gameMatrix'>
+				<div class = 'row someGap'>
+					<div class = 'col-md-3 mid' ng-repeat = 'y in x track by $index'>
+						<button class = 'btn btn-primary gridButton' ng-click = 'checkArray(y)' ng-disabled = 'y.value==="-1"?false:true'>{{y.value|changeNegativityToNothing}}</button>
+					</div>
+				</div>
+			</div>
+			<div  class = 'container footer' >
+				<div class = 'row someGap'>
+					<h1 class="col-md-12">WHO DARES WINS</h1>
+				</div>
+			</div>
+	</body>
+</html> 	

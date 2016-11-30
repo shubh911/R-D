@@ -1,0 +1,31 @@
+.gridButton{
+	display: block;
+	height: 200px;
+	width: 200px;
+	font-size: 150px;
+	background:linear-gradient(90deg, #4527a0 90%, white);
+	border-radius: 10px;
+}
+.someGap{
+	margin: 10px 20px;
+}	
+.scoreBoard{
+	background:linear-gradient(#4527a0, white);
+	font-family: 'Fredericka the Great', cursive;
+}
+.reset{
+	margin-top:10px;
+	background:linear-gradient(#4527a0, black);
+}
+.mid{
+	margin-left:7%;
+}
+.playBoard{
+	background:radial-gradient(#4527a0 ,black);
+}
+.footer{
+	text-align:center;
+	background:linear-gradient(#4527a0, white);
+	font-family: 'Fredericka the Great', cursive;
+
+}
