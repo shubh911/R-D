@@ -1,348 +1,144 @@
-$(document).ready(function(){
-	var words=`Adult
-
-			Aeroplane
-
-			Air
-
-			Aircraft Carrier
-
-			Airforce
-
-			Airport
-
-			Album
-
-			Alphabet
-
-			Apple
-
-			Arm
-
-			Army
-
-			Baby
-
-			Baby
-
-			Backpack
-
-			Balloon
-
-			Banana
-
-			Bank
-
-			Barbecue
-
-			Bathroom
-
-			Bathtub
-
-			Bed
-
-			Bed
-
-			Bee
-
-			Bible
-
-			Bible
-
-			Bird
-
-			Bomb
-
-			Book
-
-			Boss
-
-			Bottle
-
-			Bowl
-
-			Box
-
-			Boy
-
-			Brain
-
-			Bridge
-
-			Butterfly
-
-			Button
-
-			Cappuccino
-
-			Car
-
-			Carrace
-
-			Carpet
-
-			Carrot
-
-			Cave
-
-			Chair
-
-			Chess Board
-
-			Chief
-
-			Child
-
-			Chisel
-
-			Chocolates
-
-			Church
-
-			Church
-
-			Circle
-
-			Circus
-
-			Circus
-
-			Clock
-
-			Clown
-
-			Coffee
-
-			Coffeeshop
-
-			Comet
-
-			Compact Disc
-
-			Compass
-
-			Computer
-
-			Crystal
-
-			Cup
-
-			Cycle
-
-			Data Base
-
-			Desk
-
-			Diamond
-
-			Dress
-
-			Drill
-
-			Drink
-
-			Drum
-
-			Dung
-
-			Ears
-
-			Earth
-
-			Egg
-
-			Electricity
-
-			Elephant
-
-			Eraser
-
-			Explosive
-
-			Eyes
-
-			Family
-
-			Fan
-
-			Feather
-
-			Festival
-
-			Film
-
-			Finger
-
-			Fire
-
-			Floodlight
-
-			Flower
-
-			Foot
-
-			Fork
-
-			Freeway
-
-			Fruit
-
-			Fungus
-
-			Game
-
-			Garden
-
-			Gas
-
-			Gate
-
-			Gemstone
-
-			Girl
-
-			Gloves
-
-			God
-
-			Grapes
-
-			Guitar
-
-			Hammer
-
-			Hat
-
-			Hieroglyph
-
-			Highway
-
-			Horoscope
-
-			Horse
-
-			Hose
-
-			Ice
-
-			Ice-cream
-
-			Insect
-
-			Jet fighter`;
-			
-	var alpahabets=['A','B','C','D','E','F','G','H','I',
-					'J','K','L','M','N','O','P','Q','R',
-					'S','T','U','V','W','X','Y','Z'];
-	b = words.split('\n');
-	for( var i =0; i < b.length; i++){
-		if(b[i] == ' ' || b[i] === ''){
-			b.splice(i,1);
-			for(var j = 0; j < b[i].length; j++){
-				b[i] = b[i].replace(' ', '');
-				b[i] = b[i].replace('\t', '');
-				
-			}
-			b[i] = b[i].toUpperCase();
-		}
-	}
-
-		
-	var limit=0; //no of chances
-	$('#chances').html(7 - limit);
-	// array b has every word that was used in the game
-	var randomWord=b[Math.floor(Math.random() * 99)];//get the random word for play
-	// var randomWord='ELECTRICITY';
-	// var length=randomWord.length;
-	console.log(randomWord,"-->",randomWord.length);
-	var blankSpace="";
-	for(var i=0;i<randomWord.length;i++){
-		blankSpace=blankSpace+"<span id ="+i+">" + " _ " + "</span>";
-	}
-	
-	
-	$('.wordDisplay').append(blankSpace);
-	var alpahabetsDiv = $('.alpahabets');
-	var buttons = '';
-	for(var i =0; i < alpahabets.length;i++){
-		buttons = buttons + '<input type = "button" class = "btn btn-danger alpahabetsButtons" value = ' + alpahabets[i] + ' />';
-	}
-	alpahabetsDiv.append(buttons); 
-		
-	
-	$('.alpahabetsButtons').on('click', function(event){
-		var alpha = event.target.defaultValue;
-		
-		
-		//TEXT CHANGE
-		if(randomWord.search(alpha) !== -1){
-			for(var i =0; i < randomWord.length; i++){
-				if(randomWord[i] === alpha){
-					$("#" + i).text(alpha);
+var myApp = angular.module('myApp', []);
+myApp.filter('changeNegativityToNothing',
+	function(){
+		return function(value){
+				if(value === '-1'){
+					return '';
+				}
+				else{
+					return value;
 				}
 			}
-			//WINNING Condition
-			var check='';
-			for(var i=0;i<randomWord.length;i++){
-				var temp=$("#" + i).text();
-				check=check+temp;
-			}
+		}
+);
+myApp.controller('gameController',['$scope','changeNegativityToNothingFilter',
+	function($scope, changeNegativityToNothingFilter){
+		$scope.score = {x: 0, y: 0};
+		$scope.gamePlayed = 1;
+		$scope.chance = 'X';
+		$scope.gameMatrix = initializeGame();
+		
+		$scope.checkArray = function(pos){
+			console.log(pos);
+			pos.value = $scope.chance === 'X'? 'X': 'O';
 			
-			if(randomWord==check){
-				$('.alpahabetsButtons').attr('disabled',true);
-				//setTimeout(function(){alert("You Won");reset();}, 200);	//GAME WIN
-				alert("You Won");
-				reset();
+			var a = checkGameStatus($scope.gameMatrix);
+			if(a === true){
+				$scope.gamePlayed++;
+				alert($scope.chance + ' wins');	
+				$scope.gameMatrix = initializeGame();
+				if($scope.chance === 'X')
+					$scope.score.x++;
+				else
+					$scope.score.y++;
 			}
+			else if(a === false){
+				$scope.gamePlayed++;
+				alert("GAME DRAW");
+				$scope.gameMatrix = initializeGame();
+				
+			}
+		$scope.chance = $scope.chance === 'O'?'X':'O';
+		}
+		$scope.resetGame = function(){
+			$scope.score.x = 0;
+			$scope.score.y = 0;
+			$scope.gamePlayed = 1;
+			$scope.gameMatrix =initializeGame();
+		} 	
+	}
+]);
+	//board reset
+function initializeGame(){
+	var matrix = [];
+	for(var i =0;i< 3; i++){
+			matrix[i] = [];
+			for(var j = 0; j < 3; j++){
+				matrix[i][j] = {value:'-1', x:i, y:j}; 
+			}
+		}
+	return matrix;
+}
+function checkGameStatus(gameBoard){
+	var array = [];
+	//check the rows.
+	for( var i =0; i<gameBoard.length; i++){
+		array[i] = [];
+		for( var j =0; j< gameBoard[i].length; j++){
+			array[i][j] = gameBoard[i][j].value;
+		}
+	}
+	var winningOne = 'XXX';
+	var winningZero = 'OOO';
+	for( var i = 0; i < array.length; i++){
+		if(array[i].join('') === winningOne){
+			
+			return true;
+		}
+		else if(array[i].join('') === winningZero){
+		
+			return true;
 		}
 		else{
-			if(limit<6){
-				
-				if(limit==1-1){
-				$('.structure').show();			//STRUCTURE SHOW
+			
+		}
+	}
+	// check cols.
+	for(var j =0; j < array.length; j++){
+		var temp = [];
+		for( var i = 0; i < array.length; i++){
+			temp[i] = array[i][j];
+		}
+		if(temp.join('') === winningOne){
+		
+			return true;
+		}
+		else if(temp.join('') === winningZero){
+			
+			return true;
+		}
+		else{
+			
+		}
+	}
+	
+	//check diagonals.
+	var temp = [];
+	for( var i =0; i < array.length;i++){
+		temp[i] = array[i][i];
+	}
+	if(temp.join('') === winningOne){
+		
+		return true;
+	}
+	else if(temp.join('') === winningZero){
+		
+		return true;
+	}
+	else{
+		
+	}
+	var temp = [];
+	for(var i =0, j= array.length -1; i< array.length; i++, j--){
+		temp[i] = array[j][i];
+	}
+	if(temp.join('') === winningOne){
+		
+		return true;
+	}
+	else if(temp.join('') === winningZero){
+		
+		return true;			// GAME WON
+	}
+	else{
+		for(var i =0; i < array.length; i++){
+			for(var j = 0; j < array[i].length; j++){
+				if(array[i][j] === '-1'){
+					return;
 				}
-				else if(limit==2-1){
-					$('.head').show();			//HEAD SHOW
-				}
-				else if(limit==3-1){
-					$('.body').show();			//BODY SHOW
-				}
-				else if(limit==4-1){
-					$('.leftHand').show();		//LEFT-HAND SHOW
-				}
-				else if(limit==5-1){	
-				$('.rightHand').show();			//RIGHT-HAND SHOW
-				}
-				else if(limit==6-1){
-					$('.leftLeg').show();		//LEFT-LEG SHOW
-				}	
-				limit++;
-				$('#chances').html(7 - limit);
-			}
-			else{
-				$('.rightLeg').show();			//RIGHT-LEG SHOW
-				$('.alpahabetsButtons').attr('disabled',true);
-				//setTimeout(function(){alert("Game Over");reset();}, 200); 	//GAME OVER
-				alert("GAME OVER");
-				reset();
-				// THe RESET FUNCTION WILL CLEAR THE BOARD AND RESET THE SVG
 			}
 		}
-		this.disabled  = true; 
-	});
-	// TO RESET GAME BOARD
-	function reset(){
-		// $('.structure, .head, .body, .leftHand, .rightHand,.rightLeg,.leftLeg').css('display','none');
-		// $('.alpahabetsButtons').attr('disabled',false);
-		// $( ".wordDisplay" ).empty();
-		// limit=0;
-		// randomWord=b[Math.floor(Math.random() * 99)];
-		// console.log(randomWord,'-->',randomWord.length);
-		// blankSpace="";
-		// for(var i=0;i<randomWord.length;i++){
-			// blankSpace=blankSpace+"<span id ="+i+">" + " _ " + "</span>";
-		// }
-		// $('.wordDisplay').append(blankSpace);
-		window.location.reload();
-	};
-});
+		return false;			// GAME DRAW
+	}
+	
+}
