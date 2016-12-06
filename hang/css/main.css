@@ -11,7 +11,8 @@
 	padding-left:39%;
 }
 .heading div h4{
-	padding-left:39%;
+	color:red;
+	padding-left:38%;
 }
 
 .svg{
@@ -20,10 +21,10 @@
 	color:white;
 }
 .heading{
-	
+
 	background:linear-gradient(#4527a0 , black);
-	color:white;	
-	
+	color:white;
+
 }
 
 .wordDisplay{
@@ -43,12 +44,15 @@
 .structure, .head, .body, .leftHand, .rightHand,.rightLeg,.leftLeg{
 	display: none;
 }
-	
+
 .grad{
 	background:linear-gradient( #4527a0,black);
 	padding-bottom:50px;
 }
-.word{
-	
+.noteHere{
+	background:linear-gradient( #4527a0,black);
+}
+.note{
+	color:red;
 
 }
