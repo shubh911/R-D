@@ -1,0 +1,54 @@
+*{
+	font-family: 'Fredericka the Great', cursive;
+}
+.wrapper{
+	background:linear-gradient(#4527a0, white);
+}
+.heading div h1{
+	padding-left:40%;
+}
+.heading div h3{
+	padding-left:39%;
+}
+.heading div h4{
+	padding-left:39%;
+}
+
+.svg{
+	border:1px solid black;
+	background:linear-gradient(#4527a0 , white);
+	color:white;
+}
+.heading{
+	
+	background:linear-gradient(#4527a0 , black);
+	color:white;	
+	
+}
+
+.wordDisplay{
+	padding-left:30px;
+	color:red;
+}
+
+.alpahabets{
+	margin-top:50px;
+}
+.alpahabetsButtons{
+	margin:2px 1px;
+	padding:10px;
+	width:81px;
+}
+
+.structure, .head, .body, .leftHand, .rightHand,.rightLeg,.leftLeg{
+	display: none;
+}
+	
+.grad{
+	background:linear-gradient( #4527a0,black);
+	padding-bottom:50px;
+}
+.word{
+	
+
+}
