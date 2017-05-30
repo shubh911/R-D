@@ -1,32 +1,112 @@
+<!DOCKTYPE html>
 <html>
 	<head>
-		
-		<link href="css/default.css" rel="stylesheet" />
-		<link href="external/bootstrap-3.3.7/dist/css/bootstrap.css" rel="stylesheet" />
-		<link href = 'style.css' rel = 'stylesheet'>
-		<script src = 'external/angular-min.js'></script>
-		<script src="js/default.js"></script>
-		<link href="https://fonts.googleapis.com/css?family=Fredericka+the+Great" rel="stylesheet">
+		<style>
+			header{
+				text-align:center;
+			}
+			nav{
+			
+				background-color:#000;
+				padding:10px;
+			}
+			span{
+				padding:10px 20px;
+				color:white;
+				
+			}
+			a{
+				color:white;
+				text-decoration:none;
+			}
+			a:hover{
+				color:red;
+			}
+			aside{
+				width:200px;
+				border:1px solid red;
+				height:626px;
+				float:left;
+			}
+			section{
+				border:1px solid yellow;
+				overflow:hidden;
+			}
+			artical{
+				display:block;
+				border:dotted 1px grey;
+				width:100%;
+				padding:20px;
+			
+				margin:5px 0; 
+			}
+			label{
+				display:inline-block;
+				width:200px;
+				padding:5px;
+			}
+			.btn{
+				margin:20px 0 0 200px;
+				
+			}
+		</style>
 	</head>
-	<body ng-app = 'myApp' ng-controller = 'gameController'>
-			<div class = 'container scoreBoard'>
-				<div class = 'row'>
-					<H2 class = 'col-md-3 col-md-offset-2'>{{chance}}'s turn</H2>
-					<H2 class = 'col-md-5'>X : {{score.x}} | O :{{score.y}}&nbsp &nbsp &nbsp <span class="glyphicon glyphicon-flag"></span>: {{gamePlayed}}</H2>
-					<button class = 'btn btn-danger col-md-1 col-md-offset-1 reset' ng-click = 'resetGame()'> RESET</button>
-				</div>
-			</div>
-			<div  class = 'container playBoard' ng-repeat = 'x in gameMatrix'>
-				<div class = 'row someGap'>
-					<div class = 'col-md-3 mid' ng-repeat = 'y in x track by $index'>
-						<button class = 'btn btn-primary gridButton' ng-click = 'checkArray(y)' ng-disabled = 'y.value==="-1"?false:true'>{{y.value|changeNegativityToNothing}}</button>
-					</div>
-				</div>
-			</div>
-			<div  class = 'container footer' >
-				<div class = 'row someGap'>
-					<h1 class="col-md-12">WHO DARES WINS</h1>
-				</div>
-			</div>
+	<body>
+		<header>
+			<h1>Testing</h1>
+		</header>
+		<nav>
+			<span><a href="#">Home</a></span>
+			<span><a href="#">About</a></span>
+			<span><a href="#">Details</a></span>
+		</nav>
+		<aside>
+			<p>sadsa sadsa sad sasadsad sadsad sad a</p>
+			<h4>this is Aside</h4>
+		</aside>
+		<section>
+			<artical>
+				<form>
+					<label>Title</label><input type="text" placeholder="Title" required/></br>
+					<label>Name</label><input type="text" placeholder="Name" required/></br>
+					<label>Phone Number</label><input type="tel" placeholder="2323344344" required pattern="^[1-9]+[0-9]{9}$"/></br>
+					<label>Email</label><input type="email" placeholder="abc@gmail.com"/></br>
+					<label>Website</label><input type="url" placeholder="www.bored.co.in"/></br>
+					<label>No.of items to order</label><input type="number" placeholder="0"/></br>
+					<label>Search</label><input type="search" placeholder="Type here"/></br>
+					<label>Delivery Date</label><input type="date" placeholder="DD-MM-YYYY"/></br>
+					<label>Length</label><input type="range"/></br>
+					<label>Color</label><input type="color"/></br>
+					<label>Time of Delivery</label><input type="time" placeholder="HH:MM"/></br>
+					<input type="submit" class='btn'/>
+				</form>
+			</artical>
+			<artical>
+				<label>Search </label><input type='search'/> <button>Go</button>
+			</artical>
+			<artical>
+				progress:<progress  max="100"></progress>
+			</artical>
+			<artical>
+				Disk Usage:<meter value="22" max="100" min="0" ></progress>
+			</artical>
+		</section>
+		<footer>
+			<h2>Links:
+			<ul content`editable="true">
+				<li> sad sads ad</li>
+				<li> dsad sadsad sa</li>
+				<li> sadsad sad sa </li>
+				<li> sadsadsa sd</li>
+			</ul>
+			<section>
+				<video controls autoplay>
+					<source  src="C:\Users\Public\Videos\Sample Videos\Wildlife.wmv" type="video/wmv">
+				</video>
+			</section>
+		</footer>
+		
+		
+		
 	</body>
-</html> 	
+</html>
