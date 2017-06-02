@@ -1,0 +1,76 @@
+body{
+	background-image:url(desert.jpg);
+	background-repeat:no-repeat;
+}
+.mainHeader{
+	text-align:center;
+	background:linear-gradient(to right,green 40%,red 60%);
+}
+.col-three{
+	column-count:3;
+	column-gap:15px;
+	column-width:20px;	/* Not working  */
+	background:radial-gradient(red,yellow,green  );
+	/* color:#fff; */
+}
+
+/* New Selctors using Attribute
+ ^= In Start
+*= anywhere
+$=at the end */
+
+a[href^="https"]{
+	background:#ffff00;
+}
+a[href*="blog"]{
+	background:red;
+}
+a[href$="sad"]{
+	background:green;
+}
+
+
+/* this is also possible 
+p:nth-child(even)
+p:nth-child(odd)
+p:nth-of-type(2n)	--> this targets the specific element type and ignores the rest other element if comes between
+P:only-child	--> if the p is only child of the element otherwise not applied
+:not(p)	-->if the child is not an <p> type
+
+//when ever the value of input goes out-of-range
+input:out-of-range{
+	border:3px solid red;
+}
+
+ */
+ 
+.alternate p:nth-child(2n+1){
+	color:red;
+}
+.alternate p:nth-last-child(2){
+	background-color:yellow;
+}
+.alternate p:last-child{
+	color:green;
+}
+.alternate p:first-child{
+	color:blue;
+}
+.mydiv{
+	width:100px;
+	height:40px;
+	background-color:blue;
+	color:#fff;
+	z-index:99;
+	
+	text-align:center;
+	top:10px;
+	position:absolute;
+	animation:myAnim 8s infinite;
+}
+
+/* Animation start here */
+@keyframes myAnim{
+	0%{ left:0;}
+	100%{left:100%;}
+}
